@@ -1,0 +1,2 @@
+C:\Users\jvere\source\repos\FitnessTracker\fitnesstracker\dist\emcc-props.json
+C:\Users\jvere\source\repos\FitnessTracker\fitnesstracker\dist\web.config

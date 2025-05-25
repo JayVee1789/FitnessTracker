@@ -1,0 +1,7 @@
+C:\Users\jvere\source\repos\FitnessTracker\fitnesstracker\bin\Release\net8.0\publish\dist\web.config
+C:\Users\jvere\source\repos\FitnessTracker\fitnesstracker\bin\Release\net8.0\publish\dist\emcc-props.json
+C:\Users\jvere\source\repos\FitnessTracker\fitnesstracker\bin\Release\net8.0\publish\dist\FitnessTracker.staticwebassets.endpoints.json
+C:\Users\jvere\source\repos\FitnessTracker\fitnesstracker\bin\Release\net8.0\publish\dist\wwwroot\sample-data\weather.json
+C:\Users\jvere\source\repos\FitnessTracker\fitnesstracker\bin\Release\net8.0\publish\dist\wwwroot\_framework\blazor.boot.json
+C:\Users\jvere\source\repos\FitnessTracker\fitnesstracker\bin\Release\net8.0\publish\emcc-props.json
+C:\Users\jvere\source\repos\FitnessTracker\fitnesstracker\bin\Release\net8.0\publish\web.config

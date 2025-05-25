@@ -1,0 +1,60 @@
+﻿@page "/graph"
+@using FitnessTracker.Models
+@inject SupabaseService SupabaseService
+@inject IJSRuntime JS
+
+<h3 class="mb-4">📈 Évolution des poids</h3>
+
+@if (groupedEntries.Count == 0)
+{
+    <div class="alert alert-warning">Aucune donnée disponible dans Supabase.</div>
+}
+else
+{
+    @foreach (var group in groupedEntries)
+    {
+        var canvasId = GetCanvasId(group.Key);
+
+        <h5>@group.Key</h5>
+        <div style="height:300px">
+            <canvas id="@canvasId"></canvas>
+        </div>
+        <hr />
+    }
+}
+
+@code {
+    private List<PoidsEntry> entries = new();
+    private Dictionary<string, List<PoidsEntry>> groupedEntries = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        entries = await SupabaseService.GetEntriesAsync();
+        Console.WriteLine($"📦 Chargé {entries.Count} entrées depuis Supabase.");
+
+        groupedEntries = entries
+            .GroupBy(e => e.Exercice)
+            .ToDictionary(
+                g => g.Key,
+                g => g.OrderBy(e => e.Date).ToList()
+            );
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+
+        foreach (var group in groupedEntries)
+        {
+            var canvasId = GetCanvasId(group.Key);
+            var labels = group.Value.Select(e => e.Date.ToString("dd MMM")).ToArray();
+            var data = group.Value.Select(e => Math.Round(e.Poids, 1)).ToArray();
+
+            Console.WriteLine($"📊 {group.Key} → {labels.Length} points");
+            await JS.InvokeVoidAsync("drawLineChart", canvasId, labels, data);
+        }
+    }
+
+    private string GetCanvasId(string name)
+        => name.Replace(" ", "_").Replace("é", "e").Replace("è", "e").Replace("ê", "e").Replace("à", "a");
+}
